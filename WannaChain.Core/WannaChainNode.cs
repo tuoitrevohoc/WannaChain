@@ -62,7 +62,7 @@ namespace WannaChain.Core
             {
                 Chains.Add(block);
 
-                peers.Select(peer => peer.OnBlockCreated(this, block.Index));
+                BroadCastNewBlockEvent(block.Index);
             }
         }
 
@@ -114,10 +114,18 @@ namespace WannaChain.Core
                 Chains.RemoveRange(currentIndex, Chains.Count - currentIndex);
                 Chains.AddRange(newBlocks);
 
-                peers.Select(peer => peer.OnBlockCreated(this, newIndex));
+                BroadCastNewBlockEvent(newIndex);
             }
 
             return hasNewBlocks;
+        }
+
+        /// <summary>
+        /// Broads the cast new block event.
+        /// </summary>
+        /// <param name="index">Index.</param>
+        void BroadCastNewBlockEvent(int index) {
+            peers.Select(peer => peer.OnBlockCreated(this, index));
         }
     }
 }
