@@ -1,7 +1,7 @@
 # WannaChain
 A simple implementation of a block chain network.
 
-## Introduction: 5 minute into blockchain by code.
+## Introduction: 5 minutes into blockchain by code.
 
 ### 1. Block Chain
 - A list of distributed chain of blocks accross a p2p/distributed network.
@@ -18,3 +18,5 @@ A simple implementation of a block chain network.
  
 ### 4. Adding a new block (mining)
 Collect valid data that is shared a cross network and create a new block that satifies the block contract.
+
+### 5. Take a rest.
