@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WannaChain", "WannaChain\WannaChain.csproj", "{C5959AE8-E35C-48D7-81A5-33725E3BC987}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WannaChain.Core", "WannaChain.Core\WannaChain.Core.csproj", "{5737F69E-4B15-46D9-95AE-93EAF0CF0737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WannaChain.App", "WannaChain.App\WannaChain.App.csproj", "{AB52912A-B0B0-4B25-8C67-9D2E41F4F625}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5959AE8-E35C-48D7-81A5-33725E3BC987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5959AE8-E35C-48D7-81A5-33725E3BC987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5959AE8-E35C-48D7-81A5-33725E3BC987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5959AE8-E35C-48D7-81A5-33725E3BC987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5737F69E-4B15-46D9-95AE-93EAF0CF0737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5737F69E-4B15-46D9-95AE-93EAF0CF0737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5737F69E-4B15-46D9-95AE-93EAF0CF0737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5737F69E-4B15-46D9-95AE-93EAF0CF0737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB52912A-B0B0-4B25-8C67-9D2E41F4F625}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB52912A-B0B0-4B25-8C67-9D2E41F4F625}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB52912A-B0B0-4B25-8C67-9D2E41F4F625}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB52912A-B0B0-4B25-8C67-9D2E41F4F625}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
