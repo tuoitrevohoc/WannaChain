@@ -9,8 +9,12 @@
     <Folder Include="Contracts\" />
     <Folder Include="Services\" />
     <Folder Include="Contracts\Implements\" />
+    <Folder Include="Protocol\" />
+    <Folder Include="Protocol\Data\" />
+    <Folder Include="Protocol\Sockets\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
   </ItemGroup>
 </Project>
