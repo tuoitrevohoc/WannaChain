@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WannaChain.Core.Contracts;
 using WannaChain.Core.Services;
 using WannaChain.Models;
@@ -16,17 +17,18 @@ namespace WannaChain.Core
         /// <summary>
         /// The data contract
         /// </summary>
-        IDataContract<TData> dataContract;
+        readonly IDataContract<TData> dataContract;
 
         /// <summary>
         /// The block contract that contain
         /// </summary>
-        IBlockContract<TData> blockContract;
+        readonly IBlockContract<TData> blockContract;
+
 
         /// <summary>
         /// Connected peers
         /// </summary>
-        List<INode<TData>> peers = new List<INode<TData>>();
+        readonly List<IPeer<TData>> peers = new List<IPeer<TData>>();
 
         /// <summary>
         /// Gets or sets the chains.
@@ -71,10 +73,12 @@ namespace WannaChain.Core
         /// </summary>
         /// <returns>The block.</returns>
         /// <param name="index">Index.</param>
-        public ICollection<Block<TData>> GetBlocks(int index)
+        public Task<ICollection<Block<TData>>> GetBlocks(int index)
         {
             var count = Chains.Count;
-            return Chains.GetRange(index, count - index);
+            return Task.FromResult((ICollection<Block<TData>>)
+                Chains.GetRange(index, count - index)
+            );
         }
 
         /// <summary>
@@ -82,9 +86,9 @@ namespace WannaChain.Core
         /// </summary>
         /// <returns>The block hashes.</returns>
         /// <param name="index">Index.</param>
-        public string GetBlockHash(int index)
+        public Task<string> GetBlockHash(int index)
         {
-            return Chains[index].Hash;
+            return Task.FromResult(Chains[index].Hash);
         }
 
         /// <summary>
@@ -92,15 +96,15 @@ namespace WannaChain.Core
         /// </summary>
         /// <param name="source">Source.</param>
         /// <param name="newIndex">the new block index</param>
-        public bool OnBlockCreated(INode<TData> source, int newIndex)
+        public async Task<bool> OnBlockCreated(IPeer<TData> source, int newIndex)
         {
-            var currentIndex = Chains.Count;
+            var currentIndex = Chains.Count - 1;
             var hasNewBlocks = newIndex > currentIndex;
 
             if (hasNewBlocks)
             {
 
-                while (Chains[currentIndex].Hash != source.GetBlockHash(currentIndex)
+                while (Chains[currentIndex].Hash != await source.GetBlockHash(currentIndex)
                        && currentIndex > 0)
                 {
                     currentIndex--;
@@ -109,7 +113,7 @@ namespace WannaChain.Core
                 currentIndex++;
 
                 // download the new branch for replacement
-                var newBlocks = source.GetBlocks(currentIndex);
+                var newBlocks = await source.GetBlocks(currentIndex);
 
                 Chains.RemoveRange(currentIndex, Chains.Count - currentIndex);
                 Chains.AddRange(newBlocks);
@@ -126,6 +130,15 @@ namespace WannaChain.Core
         /// <param name="index">Index.</param>
         void BroadCastNewBlockEvent(int index) {
             peers.Select(peer => peer.OnBlockCreated(this, index));
+        }
+
+        /// <summary>
+        /// Add a peer to this noode
+        /// </summary>
+        /// <param name="peer">Peer.</param>
+        public void AddPeer(IPeer<TData> peer)
+        {
+            peers.Add(peer);
         }
     }
 }

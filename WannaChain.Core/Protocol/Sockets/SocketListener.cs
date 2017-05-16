@@ -56,6 +56,7 @@ namespace WannaChain.Core.Protocol.Sockets
             try
             {
                 listener = new TcpListener(IPAddress.Any, port);
+                listener.Start();
 
                 isRunning = true;
 
@@ -64,6 +65,7 @@ namespace WannaChain.Core.Protocol.Sockets
                     var socket = listener.AcceptSocketAsync().Result;
                     var stream = new SocketDataStream(socket);
 
+                    Console.WriteLine("Client connected!");
                     OnClientConnected(stream);
                 }
             }

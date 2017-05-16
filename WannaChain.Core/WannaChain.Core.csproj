@@ -12,6 +12,7 @@
     <Folder Include="Protocol\" />
     <Folder Include="Protocol\Data\" />
     <Folder Include="Protocol\Sockets\" />
+    <Folder Include="Wrappers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />

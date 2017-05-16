@@ -1,4 +1,5 @@
-﻿using WannaChain.Core.Protocol.Data;
+﻿using System.Threading.Tasks;
+using WannaChain.Core.Protocol.Data;
 
 namespace WannaChain.Core.Protocol
 {
@@ -25,7 +26,7 @@ namespace WannaChain.Core.Protocol
         /// </summary>
         /// <returns>The send.</returns>
         /// <param name="packet">Packet.</param>
-        bool Send(Packet packet);
+        Task<bool> Send(Packet packet);
 
         /// <summary>
         /// Close current datastream

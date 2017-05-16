@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using WannaChain.Core.Protocol.Data;
 
 namespace WannaChain.Core.Protocol.Sockets
@@ -13,24 +14,19 @@ namespace WannaChain.Core.Protocol.Sockets
 	{
 
 		/// <summary>
-		/// The communicate socket
-		/// </summary>
-		Socket socket;
-
-		/// <summary>
 		/// The stream reader
 		/// </summary>
-		StreamReader reader;
+		readonly StreamReader reader;
 
 		/// <summary>
 		/// The stream writer
 		/// </summary>
-		StreamWriter writer;
+		readonly StreamWriter writer;
 
 		/// <summary>
 		/// The thread that runs this
 		/// </summary>
-		Thread thread;
+		readonly Thread thread;
 
 		/// <summary>
 		/// is this socket data running
@@ -83,6 +79,8 @@ namespace WannaChain.Core.Protocol.Sockets
 					var command = (CommandType)Enum.Parse(typeof(CommandType), commandString);
 					var packet = new Packet(command, data);
 
+                    Console.WriteLine($"Incoming data {command}: {data}");
+
 					OnPacketReceived(packet);
 				}
 			}
@@ -98,10 +96,10 @@ namespace WannaChain.Core.Protocol.Sockets
 		/// </summary>
 		/// <returns>The send.</returns>
 		/// <param name="packet">Packet.</param>
-		public bool Send(Packet packet)
+		public async Task<bool> Send(Packet packet)
 		{
-			writer.WriteLine(packet.Command.ToString());
-			writer.WriteLine(packet.Data);
+			await writer.WriteLineAsync(packet.Command.ToString());
+			await writer.WriteLineAsync(packet.Data);
 
 			return true;
 		}
