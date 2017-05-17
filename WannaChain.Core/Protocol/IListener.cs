@@ -18,8 +18,14 @@
 		OnClientConnectedEventHandler OnClientConnected { get; set; }
 
         /// <summary>
+        /// Start listening
+        /// </summary>
+        void Start();
+
+        /// <summary>
         /// Close current listener
         /// </summary>
         void Close();
+        
     }
 }

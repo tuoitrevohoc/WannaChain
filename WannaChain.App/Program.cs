@@ -16,11 +16,18 @@ namespace WannaChain.App
         /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
+            var port = 2345;
+
+            if (args.Length > 0)
+            {
+                port = Int32.Parse(args[0]);
+            }
+
             var blockContract = new CryptoBlockContract<string>();
             var dataContract = new AnyDataContract<string>();
 
             var node = new WannaChainNode<string>(dataContract, blockContract);
-            var listener = new SocketListener(2345);
+            var listener = new SocketListener(port);
             var server = new ServerNode<string>(listener, node);
 
             server.Start();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using WannaChain.Core.Protocol;
 using WannaChain.Core.Protocol.Sockets;
 using WannaChain.Core.Services;
@@ -53,13 +54,15 @@ namespace WannaChain.Core.Wrappers
         /// </summary>
         /// <param name="address">Address.</param>
         /// <param name="port">Port.</param>
-        void AddClient(string address, int port) 
+        public async Task<bool> AddClient(string address, int port) 
         {
             var client = new TcpClient();
-            client.ConnectAsync(address, port).RunSynchronously();
+            await client.ConnectAsync(address, port);
 
             var dataStream = new SocketDataStream(client.Client);
             OnClientConnected(dataStream);
+
+            return true;
         }
 
         /// <summary>
@@ -67,6 +70,7 @@ namespace WannaChain.Core.Wrappers
         /// </summary>
         public void Start() 
         {
+            listener.Start();
             Console.WriteLine("Server Up and Run");
         }
     }

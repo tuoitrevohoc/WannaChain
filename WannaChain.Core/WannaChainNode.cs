@@ -47,6 +47,8 @@ namespace WannaChain.Core
         {
             this.dataContract = dataContract;
             this.blockContract = blockContract;
+
+            Chains = new List<Block<TData>>();
         }
 
 
@@ -104,8 +106,8 @@ namespace WannaChain.Core
             if (hasNewBlocks)
             {
 
-                while (Chains[currentIndex].Hash != await source.GetBlockHash(currentIndex)
-                       && currentIndex > 0)
+                while (currentIndex > 0 
+                        && Chains[currentIndex].Hash != await source.GetBlockHash(currentIndex))
                 {
                     currentIndex--;
                 }

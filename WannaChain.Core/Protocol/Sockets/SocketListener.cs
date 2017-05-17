@@ -44,8 +44,6 @@ namespace WannaChain.Core.Protocol.Sockets
         public SocketListener(int port)
         {
             this.port = port;
-            thread = new Thread(Listen);
-            thread.Start();
         }
 
         /// <summary>
@@ -82,6 +80,15 @@ namespace WannaChain.Core.Protocol.Sockets
         public void Close() 
         {
             isRunning = false;   
+        }
+
+        /// <summary>
+        /// Start listening 
+        /// </summary>
+        public void Start()
+        {
+            thread = new Thread(Listen);
+            thread.Start();
         }
     }
 }
